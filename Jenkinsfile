@@ -1,5 +1,14 @@
+#!groovy
+
+propetyes([disableConcurrentBuilds()])
+
 pipeline {
-    agent any
+    agent { label 'master' }
+    
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10')
+        timestamps()
+    }
     
     environment {
         PROJECT_NAME = "simple-project"
@@ -7,6 +16,11 @@ pipeline {
     }
 
     stages {
+        stage('First step') {
+            steps {
+                sh "ssh root@vm-centos 'hostname'"
+            }
+        }
         stage('Build') {
             steps {
                 echo 'Building...'
