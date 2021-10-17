@@ -6,7 +6,7 @@ pipeline {
     agent { label 'master' }
     
     options {
-        timestamps() 
+        timestamps()
         buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10')
     }
     
