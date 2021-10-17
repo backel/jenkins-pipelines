@@ -7,8 +7,7 @@ pipeline {
     
     options {
         timestamps()
-        buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10')
-    }
+        buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10') }
     
     environment {
         PROJECT_NAME = "simple-project"
