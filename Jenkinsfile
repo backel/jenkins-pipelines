@@ -1,6 +1,6 @@
 #!groovy
 
-propetyes([disableConcurrentBuilds()])
+properties([disableConcurrentBuilds()])
 
 pipeline {
     agent { label 'master' }
