@@ -13,12 +13,28 @@ pipeline {
     }
 
     stages {
+	stage('docker login') {
+            steps {
+                echo "docker login"
+		withCredentials([usernamePassword(credentialsId: 'docker-hub-cred', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+		    sh '''
+		    docker login -u $USERNAME -p $PASSWORD
+		    '''
+		}
+            }
+        }
         stage('docker build') {
             steps {
                 echo "start building image"
 		dir ('docker') {
                     sh "docker build -t backel/toolbox:latest . "
 		}
+            }
+        }
+	stage('docker push') {
+            steps {
+                echo "docker push"
+                sh "docker push backel/toolbox:latest"
             }
         }
     }
